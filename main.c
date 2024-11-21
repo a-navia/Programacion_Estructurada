@@ -1,37 +1,41 @@
-//
-// Created by navia on 18-Nov-24.
-//
 #include <stdio.h>
-#include "Persona.h"
 #include <stdlib.h>
-int main (){
-    //NODO PARA LA LISTA DE ESTUDIANTES
+#include "Estructura/Persona.h"
+#include "Union/Variable.h"
+
+int main() {
+    // NODO PARA LA LISTA DE ESTUDIANTES
     Nodo *listaEstudiantes = NULL;
-//ESTUDIANTES INDIVIDUALES
+    // ESTUDIANTES INDIVIDUALES
+    printf("Estructura estudiantes->\n");
     Estudiante estudiante1 = est1("Juan", 20, 9.5);
     Estudiante* estudiante2 = est2("Ana", 22, 9.8);
-//MOSTRAR ESTUDIANTES
-    printf("Estudiante 1: %s, Edad: %d, Promedio: %.2f\n", estudiante1.nombre, estudiante1.edad, estudiante1.promedio);
-    printf("Estudiante 2: %s, Edad: %d, Promedio: %.2f\n", estudiante2->nombre, estudiante2->edad, estudiante2->promedio);
-//MOSTRAR ESTUDIANTES DESDE PUNTERO
+    // MOSTRAR ESTUDIANTES DESDE PUNTERO
+    printf("Puntero->\n");
     verEstudiante(&estudiante1);
     verEstudiante(estudiante2);
-//CREAR NODO "nuevoNodo" Y AÑADIR ESTUDIANTE
+    // CREAR NODO "nuevoNodo" Y AÑADIR ESTUDIANTE
     añadirEstudiante(&listaEstudiantes, "Juan", 20, 9.5);
     añadirEstudiante(&listaEstudiantes, "Ana", 22, 9.8);
-// extras para la lista
+    // extras para la lista
     añadirEstudiante(&listaEstudiantes, "Rodrigo", 19, 9.8);
     añadirEstudiante(&listaEstudiantes, "Louise", 22, 2.1);
-//MOSTRAR LISTA DE ESTUDIANTES
-    printf("Lista de estudiantes:\n");
+    // MOSTRAR LISTA DE ESTUDIANTES
+    printf("LISTA->\n");
+    printf("\tLista de estudiantes:\n");
     verEstudiantes(listaEstudiantes);
-//ELIMINAR ESTUDIANTE
-    printf("\nEliminando a Juan...\n");
+    // ELIMINAR ESTUDIANTE
+    printf("ELIMINADO->\n");
+    printf("\tEliminando a Juan\n");
     eliminarEstudiante(&listaEstudiantes, "Juan");
-//MOSTRAR LISTA DE ESTUDIANTES ACTUALIZADA
-    printf("\nLista de estudiantes actualizada:\n");
+    // MOSTRAR LISTA DE ESTUDIANTES ACTUALIZADA
+    printf("\t\nLista de estudiantes actualizada:\n");
     verEstudiantes(listaEstudiantes);
-//LIBERAR MEMORIA
+    // LIBERAR MEMORIA
+    liberarLista(listaEstudiantes);
     free(estudiante2);
+    // Uso de la union
+    printf("UNION ->\n");
+    usaUnion();
     return 0;
 }

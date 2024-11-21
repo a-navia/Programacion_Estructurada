@@ -4,11 +4,13 @@
 #include "Persona.h"
 
 // Crear un estudiante estático
+
 Estudiante est1(const char* nombre, int edad, float promedio) {
     Estudiante estudiante1;
     strcpy(estudiante1.nombre, nombre);
     estudiante1.edad = edad;
     estudiante1.promedio = promedio;
+    printf("\tEstudiante 1: %s, Edad: %d, Promedio: %.2f\n", estudiante1.nombre, estudiante1.edad, estudiante1.promedio);
     return estudiante1;
 }
 
@@ -22,12 +24,13 @@ Estudiante* est2(const char* nombre, int edad, float promedio) {
     strcpy(estudiante2->nombre, nombre);
     estudiante2->edad = edad;
     estudiante2->promedio = promedio;
+    printf("\tEstudiante 2: %s, Edad: %d, Promedio: %.2f\n", estudiante2->nombre, estudiante2->edad, estudiante2->promedio);
     return estudiante2;
 }
 
 // Mostrar un estudiante desde un puntero
 void verEstudiante(Estudiante* ptr) {
-    printf("Estudiante (desde puntero): %s, Edad: %d, Promedio: %.2f\n",
+    printf("\tEstudiante (desde puntero): %s, Edad: %d, Promedio: %.2f\n",
            ptr->nombre, ptr->edad, ptr->promedio);
 }
 
@@ -56,7 +59,7 @@ void añadirEstudiante(Nodo** cabeza, const char* nombre, int edad, float promed
 void verEstudiantes(Nodo* cabeza) {
     Nodo* actual = cabeza;
     while (actual != NULL) {
-        printf("Nombre: %s, Edad: %d, Promedio: %.2f\n",
+        printf("\t""Nombre: %s, Edad: %d, Promedio: %.2f\n",
                actual->estudiante.nombre, actual->estudiante.edad,
                actual->estudiante.promedio);
         actual = actual->siguiente;
@@ -81,7 +84,7 @@ void eliminarEstudiante(Nodo** cabeza, const char* nombre) {
         anterior->siguiente = actual->siguiente;
     }
     free(actual);
-    printf("Estudiante eliminado.\n");
+    printf("\t""Estudiante eliminado.\n");
 }
 
 // Liberar memoria de la lista
@@ -92,4 +95,5 @@ void liberarLista(Nodo* cabeza) {
         free(actual);
         actual = siguiente;
     }
+    printf("\t""Memoria liberada.\n");
 }
