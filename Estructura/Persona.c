@@ -5,17 +5,17 @@
 
 // Crear un estudiante estático
 
-Estudiante est1(const char* nombre, int edad, float promedio) {
+Estudiante est1(const char* nombre, int edad, double promedio) {
     Estudiante estudiante1;
     strcpy(estudiante1.nombre, nombre);
     estudiante1.edad = edad;
-    estudiante1.promedio = promedio;
+    estudiante1.promedio = (float)promedio;
     printf("\tEstudiante 1: %s, Edad: %d, Promedio: %.2f\n", estudiante1.nombre, estudiante1.edad, estudiante1.promedio);
     return estudiante1;
 }
 
 // Crear un estudiante dinámico
-Estudiante* est2(const char* nombre, int edad, float promedio) {
+Estudiante* est2(const char* nombre, int edad, double promedio) {
     Estudiante* estudiante2 = (Estudiante*)malloc(sizeof(Estudiante));
     if (estudiante2 == NULL) {
         perror("Error al asignar memoria");
@@ -23,7 +23,7 @@ Estudiante* est2(const char* nombre, int edad, float promedio) {
     }
     strcpy(estudiante2->nombre, nombre);
     estudiante2->edad = edad;
-    estudiante2->promedio = promedio;
+    estudiante2->promedio = (float)promedio;
     printf("\tEstudiante 2: %s, Edad: %d, Promedio: %.2f\n", estudiante2->nombre, estudiante2->edad, estudiante2->promedio);
     return estudiante2;
 }
@@ -35,7 +35,7 @@ void verEstudiante(Estudiante* ptr) {
 }
 
 // Crear un nodo para la lista
-Nodo* crearNodo(const char* nombre, int edad, float promedio) {
+Nodo* crearNodo(const char* nombre, int edad, double promedio) {
     Nodo* nuevoNodo = (Nodo*)malloc(sizeof(Nodo));
     if (nuevoNodo == NULL) {
         fprintf(stderr, "Error al asignar memoria\n");
@@ -43,20 +43,20 @@ Nodo* crearNodo(const char* nombre, int edad, float promedio) {
     }
     strcpy(nuevoNodo->estudiante.nombre, nombre);
     nuevoNodo->estudiante.edad = edad;
-    nuevoNodo->estudiante.promedio = promedio;
+    nuevoNodo->estudiante.promedio = (float)promedio;
     nuevoNodo->siguiente = NULL;
     return nuevoNodo;
 }
 
 // Añadir un estudiante a la lista
-void añadirEstudiante(Nodo** cabeza, const char* nombre, int edad, float promedio) {
-    Nodo* nuevoNodo = crearNodo(nombre, edad, promedio);
+void añadirEstudiante(Nodo** cabeza, const char* nombre, int edad, double promedio) {
+    Nodo* nuevoNodo = crearNodo(nombre, edad, (float)promedio);
     nuevoNodo->siguiente = *cabeza;
     *cabeza = nuevoNodo;
 }
 
 // Ver todos los estudiantes en la lista
-void verEstudiantes(Nodo* cabeza) {
+void verEstLista(Nodo* cabeza) {
     Nodo* actual = cabeza;
     while (actual != NULL) {
         printf("\t""Nombre: %s, Edad: %d, Promedio: %.2f\n",
@@ -96,4 +96,23 @@ void liberarLista(Nodo* cabeza) {
         actual = siguiente;
     }
     printf("\t""Memoria liberada.\n");
+}
+Estudiante copiarEstudiante(Estudiante original) {
+    Estudiante copia;
+    strcpy(copia.nombre, original.nombre);
+    copia.edad = original.edad;
+    copia.promedio = original.promedio;
+    return copia;
+}
+void modificarEstudiante(Estudiante* estudiante, const char* nombre, int edad, double promedio) {
+    strcpy(estudiante->nombre, nombre);
+    estudiante->edad = edad;
+    estudiante->promedio = (float)promedio;
+}
+void medianteDireccion(Estudiante* estudiante, const char* nombre, int edad, double promedio) {
+    strcpy(estudiante->nombre, nombre);
+    estudiante->edad = edad;
+    estudiante->promedio = (float)promedio;
+    printf("\tEstudiante modificado por direccion: %s, Edad: %d, Promedio: %.2f\n",
+           estudiante->nombre, estudiante->edad, estudiante->promedio);
 }
